@@ -1,5 +1,5 @@
 
-import { AppBar, Badge, Button, Grid, IconButton, Link, Toolbar } from '@material-ui/core';
+import { AppBar, Badge, Button, Grid, IconButton, Toolbar } from '@material-ui/core';
 import React from 'react';
 import logo from '../../assets/commerce.png';
 import useStyles from './styles';

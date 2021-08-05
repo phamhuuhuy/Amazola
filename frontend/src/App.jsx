@@ -1,10 +1,9 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import useStyles from './styles'
-import Navbar from './components/Navbar/Navbar'
-import Products from './components/Products/Products';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Navbar from './components/Navbar/Navbar';
 import ProductDetail from './components/Products/Product/ProductDetail/ProductDetail';
+import Products from './components/Products/Products';
+import useStyles from './styles';
 
 function App() {
   const classes = useStyles()

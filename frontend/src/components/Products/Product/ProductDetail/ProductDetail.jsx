@@ -1,12 +1,12 @@
 import { Box, Button, Container, Grid, Typography } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import useStyles from './Styles'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const ProductDetail = () => {
-    const { id } = useParams()
+    // const { id } = useParams()
     const classes = useStyles()
     return (
         <Container style={{ marginTop: "20px" }}>
@@ -14,7 +14,7 @@ const ProductDetail = () => {
                 spacing={2}
             >
                 <Grid className={classes.root} container item xs={12} md={6}>
-                    <img src="https://picsum.photos/500/500" />
+                    <img src="https://picsum.photos/500/500" alt="hello" />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Box className={classes.sub}>
