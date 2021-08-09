@@ -4,11 +4,13 @@ import React from 'react';
 import logo from '../../assets/commerce.png';
 import useStyles from './styles';
 import { ShoppingCart } from '@material-ui/icons';
-import { Link as Router } from 'react-router-dom'
+import { Link, Link as Router } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const classes = useStyles();
-
+    const cartItem = useSelector(state => state.cart)
+    const { cartItems } = cartItem
 
     return (
         <AppBar position="fixed" color="primary" >
@@ -44,8 +46,8 @@ const Navbar = () => {
                 </Grid>
 
                 <Grid container justifyContent="flex-end" spacing={3}>
-                    <IconButton aria-label="Show cart items" color="inherit">
-                        <Badge badgeContent={3} color="secondary">
+                    <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
+                        <Badge badgeContent={cartItems.length} color="secondary">
                             <ShoppingCart />
                         </Badge>
                     </IconButton>

@@ -17,7 +17,19 @@ export default makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             width: "80%"
         }
-    }
-
+    },
+    input: {
+        '&[type=number]': {
+            '-moz-appearance': 'textfield',
+        },
+        '&::-webkit-outer-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0,
+        },
+        '&::-webkit-inner-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0,
+        },
+    },
 
 }));

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import Product from './Product/Product'
 import Alert from '@material-ui/lab/Alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProducts } from '../actions/productActions';
+import { listProducts } from '../../actions/productActions';
 
 
 const Products = () => {

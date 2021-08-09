@@ -1,90 +1,32 @@
 import express from 'express'
+import mongoose from 'mongoose'
+import productRouter from './routers/productRouter.js'
+import userRouter from './routers/userRouter.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express()
-
-const data = [
-    {
-        _id: '1',
-        name: 'Nike Slim Shirt',
-        category: 'Shirts',
-        image: 'https://picsum.photos/200',
-        price: 120,
-        countInStock: 10,
-        brand: 'Nike',
-        rating: 4.5,
-        numReviews: 10,
-        description: 'high quality product',
-    },
-    {
-        _id: '2',
-        name: 'Adidas Fit Shirt',
-        category: 'Shirts',
-        image: 'https://picsum.photos/200',
-        price: 100,
-        countInStock: 20,
-        brand: 'Adidas',
-        rating: 4.0,
-        numReviews: 10,
-        description: 'high quality product',
-    },
-    {
-        _id: '3',
-        name: 'Lacoste Free Shirt',
-        category: 'Shirts',
-        image: 'https://picsum.photos/200',
-        price: 220,
-        countInStock: 0,
-        brand: 'Lacoste',
-        rating: 4.8,
-        numReviews: 17,
-        description: 'high quality product',
-    },
-    {
-        _id: '4',
-        name: 'Nike Slim Pant',
-        category: 'Pants',
-        image: 'https://picsum.photos/200',
-        price: 78,
-        countInStock: 15,
-        brand: 'Nike',
-        rating: 4.5,
-        numReviews: 14,
-        description: 'high quality product',
-    },
-    {
-        _id: '5',
-        name: 'Puma Slim Pant',
-        category: 'Pants',
-        image: 'https://picsum.photos/200',
-        price: 65,
-        countInStock: 5,
-        brand: 'Puma',
-        rating: 4.5,
-        numReviews: 10,
-        description: 'high quality product',
-    },
-    {
-        _id: '6',
-        name: 'Adidas Fit Pant',
-        category: 'Pants',
-        image: 'https://picsum.photos/200',
-        price: 139,
-        countInStock: 12,
-        brand: 'Adidas',
-        rating: 4.5,
-        numReviews: 15,
-        description: 'high quality product',
-    },
-]
-
-app.get('/api/products', (req, res) => {
-    res.send(data)
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+mongoose.connect('mongodb://localhost/amazola', {
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
 })
+
+
+
+app.use('/api/user', userRouter)
+app.use('/api/products', productRouter)
 
 app.get('/', (req, res) => {
     res.send('Server is ready');
 })
 
+app.use((err, req, res, next) => {
+    res.status(500).send({ message: err.message });
+})
 
 app.listen(process.env.PORT || 5000, () => {
     console.log('Server http://localhost:5000')

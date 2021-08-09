@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Cart from './components/Cart/Cart';
 import Navbar from './components/Navbar/Navbar';
 import ProductDetail from './components/Products/Product/ProductDetail/ProductDetail';
 import Products from './components/Products/Products';
@@ -14,6 +15,9 @@ function App() {
         <Navbar />
         <div className={classes.toolbar} />
         <Switch>
+          <Route path="/cart" exact>
+            <Cart />
+          </Route>
           <Route path="/" exact>
             <Products />
           </Route>
