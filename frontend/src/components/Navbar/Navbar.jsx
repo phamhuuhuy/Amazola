@@ -1,17 +1,71 @@
-
-import { AppBar, Badge, Button, Grid, IconButton, Toolbar } from '@material-ui/core';
-import React from 'react';
+import { AppBar, Avatar, Badge, Button, Grid, IconButton, Toolbar } from '@material-ui/core';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { withStyles } from '@material-ui/core/styles';
+import { ShoppingCart } from '@material-ui/icons';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Link as Router } from 'react-router-dom';
+import { signout } from '../../actions/userAction';
 import logo from '../../assets/commerce.png';
 import useStyles from './styles';
-import { ShoppingCart } from '@material-ui/icons';
-import { Link, Link as Router } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+
+const StyledMenu = withStyles({
+    paper: {
+        border: '1px solid #d3d4d5',
+    },
+})((props) => (
+    <Menu
+        elevation={0}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+        }}
+        transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+        }}
+        {...props}
+    />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+    root: {
+        '&:focus': {
+            backgroundColor: theme.palette.primary.main,
+            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+                color: theme.palette.common.white,
+            },
+        },
+    },
+}))(MenuItem);
 
 const Navbar = () => {
     const classes = useStyles();
     const cartItem = useSelector(state => state.cart)
+    const userSignin = useSelector(state => state.userSignin)
     const { cartItems } = cartItem
+    const { userInfo } = userSignin
+    const [anchorEl, setAnchorEl] = useState(null);
+    const dispatch = useDispatch()
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const open = Boolean(anchorEl);
 
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const signoutHandler = () => {
+        dispatch(signout())
+        setAnchorEl(null)
+    }
     return (
         <AppBar position="fixed" color="primary" >
             <Toolbar>
@@ -31,18 +85,7 @@ const Navbar = () => {
                         <Button component={Router} to="/product" color="inherit" variant="outlined" >Cart</Button>
 
                     </Grid>
-                    {/* <Grid item>
-                        <Link color="inherit" variant="outlined" >Login</Link>
-                    </Grid>
-                    <Grid item>
-                        <Link color="inherit" variant="outlined" >Login</Link>
-                    </Grid>
-                    <Grid item>
-                        <Link color="inherit" variant="outlined" >Login</Link>
-                    </Grid>
-                    <Grid item>
-                        <Link color="inherit" variant="outlined" >Login</Link>
-                    </Grid> */}
+
                 </Grid>
 
                 <Grid container justifyContent="flex-end" spacing={3}>
@@ -51,6 +94,40 @@ const Navbar = () => {
                             <ShoppingCart />
                         </Badge>
                     </IconButton>
+                    {
+                        userInfo ? (
+                            <div>
+                                <Avatar onClick={handleClick} aria-controls="customized-menu"
+                                    aria-haspopup="true" className={classes.pink} alt={userInfo.name}>{userInfo.name.charAt(0)}
+                                </Avatar>
+                                <StyledMenu
+                                    id="customized-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={open}
+                                    onClose={handleClose}
+                                >
+                                    <StyledMenuItem>
+                                        <ListItemIcon>
+                                            <AccountCircleIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText primary="My Profile" />
+                                    </StyledMenuItem>
+                                    <StyledMenuItem onClick={signoutHandler}>
+                                        <ListItemIcon>
+                                            <ExitToAppIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText primary="Sign Out" />
+                                    </StyledMenuItem>
+
+                                </StyledMenu>
+                            </div>
+
+                        ) : (
+                            <Button component={Link} to="/signin">Sign in</Button>
+                        )
+                    }
+
                 </Grid>
             </Toolbar>
         </AppBar >

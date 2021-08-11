@@ -13,8 +13,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { default as Alert, default as MuiAlert } from "@material-ui/lab/Alert";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link as goBackCart } from "react-router-dom";
+import { Link as changeURL } from "react-router-dom";
 import { removeAllCartItems, removeCartItems, updateCartItems } from "../../actions/cartAction";
+import CartNav from "../CartNav/CartNav";
 import useStyles from "./styles";
 
 function Alert1(props) {
@@ -28,13 +29,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Cart = () => {
     const classes = useStyles();
     const cartItemsOld = useSelector((state) => state.cart.cartItems);
-    const navBar = ["1. Cart", "2. Detail", "3. Payment", "4. Review"];
-    const [countButton, setCountButton] = useState(0);
     const dispatch = useDispatch();
     const [warningQuantity, setWarningQuantity] = useState(false);
     const [confirmRemove, setConfirmRemove] = useState(false);
     const [removeItem, setRemoveItem] = useState(null)
-
 
     const handleClickOpenConfirmRemove = (item) => {
         setConfirmRemove(true);
@@ -72,7 +70,7 @@ const Cart = () => {
                 {/* Don't have any item in cart */}
                 <Alert severity="error">
                     Your Cart is Empty!{" "}
-                    <Link component={goBackCart} to="/">
+                    <Link component={changeURL} to="/">
                         Go back the product
                     </Link>
                 </Alert>
@@ -116,44 +114,7 @@ const Cart = () => {
                         Can not choose 0 quantity!
                     </Alert1>
                 </Snackbar>
-                <Grid container>
-                    <Grid item sm={12} md={8}>
-                        <Box
-                            display="flex"
-                            mb={5}
-                            alignItems="center"
-                            justifyContent="center"
-                        >
-                            {navBar.map((name, index) => (
-                                <>
-                                    <Button
-                                        variant="contained"
-                                        className={
-                                            index === 3
-                                                ? classes.disabledButton
-                                                : countButton >= index
-                                                    ? classes.buttonNavActive
-                                                    : classes.buttonNav
-                                        }
-                                        size="small"
-                                        onClick={() => {
-                                            index < 3 && setCountButton(index);
-                                        }}
-                                    >
-                                        {name}
-                                    </Button>
-                                    {index < 3 && (
-                                        <Box
-                                            className={
-                                                countButton > index ? classes.lineActive : classes.line
-                                            }
-                                        ></Box>
-                                    )}
-                                </>
-                            ))}
-                        </Box>
-                    </Grid>
-                </Grid>
+                <CartNav current={1} />
                 <Box ml={6} mr={6}>
                     <Grid container spacing={5}>
                         <Grid item xs={12} sm={9}>
@@ -342,6 +303,8 @@ const Cart = () => {
                                         <Divider variant="middle"></Divider>
                                     </Box>
                                     <Button
+                                        component={changeURL}
+                                        to="/signin?redirect=shipping"
                                         variant="contained"
                                         color="secondary"
                                         style={{ width: "100%" }}

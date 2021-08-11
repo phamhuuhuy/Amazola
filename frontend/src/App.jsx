@@ -4,6 +4,9 @@ import Cart from './components/Cart/Cart';
 import Navbar from './components/Navbar/Navbar';
 import ProductDetail from './components/Products/Product/ProductDetail/ProductDetail';
 import Products from './components/Products/Products';
+import Register from './components/Register/Register';
+import Shipping from './components/Shipping/Shipping';
+import SignIn from './components/Signin/Signin';
 import useStyles from './styles';
 
 function App() {
@@ -23,6 +26,15 @@ function App() {
           </Route>
           <Route path="/product/:id" exact>
             <ProductDetail />
+          </Route>
+          <Route path="/signin" exact>
+            <SignIn />
+          </Route>
+          <Route path="/register" exact>
+            <Register />
+          </Route>
+          <Route path="/shipping" exact>
+            <Shipping />
           </Route>
         </Switch>
 
