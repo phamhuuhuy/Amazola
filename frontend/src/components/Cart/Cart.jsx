@@ -41,6 +41,7 @@ const Cart = () => {
 
     const handleCloseConfirmRemove = () => {
         setConfirmRemove(false);
+        setRemoveItem(null)
     };
 
     const handleCloseWarningQuantity = (event, reason) => {
