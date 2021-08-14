@@ -79,7 +79,7 @@ export default function Register() {
                         Password is empty or not correct!!
                     </Alert>
                 </Box>}
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
                         variant="outlined"
                         margin="normal"

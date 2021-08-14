@@ -69,6 +69,10 @@ const Navbar = () => {
         setAnchorEl(null)
     }
 
+    const handleProfile = () => {
+        history.push("/userprofile")
+    }
+
     return (
         <AppBar position="fixed" color="primary" >
             <Toolbar>
@@ -110,7 +114,7 @@ const Navbar = () => {
                                     open={open}
                                     onClose={handleClose}
                                 >
-                                    <StyledMenuItem>
+                                    <StyledMenuItem onClick={handleProfile}>
                                         <ListItemIcon>
                                             <AccountCircleIcon fontSize="small" />
                                         </ListItemIcon>
