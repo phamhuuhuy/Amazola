@@ -17,7 +17,7 @@ const Shipping = () => {
     const subTotal = (cartItemsOld.length !== 0 ? (cartItemsOld
         .map((item) => +item.price * +item.qty)
         .reduce((a, b) => a + b)) : 0)
-    const tax = subTotal * 0.1
+    const tax = (subTotal * 10) / 100
     const total = tax + subTotal
     const handleDataForm = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -93,8 +93,9 @@ const Shipping = () => {
     }
     const handleSubmit = () => {
         if (handleValidation()) {
-            dispatch(saveShippingAddress(form))
             history.push('/payment')
+            dispatch(saveShippingAddress(form))
+
         }
 
     }
@@ -301,7 +302,7 @@ const Shipping = () => {
                                     </Grid>
                                 </Grid>
                                 <Grid container spacing={1}>
-                                    <Grid item xs="6">
+                                    <Grid item xs="12" md="6">
                                         <Button
                                             component={changeURL}
                                             to="/cart"
@@ -309,10 +310,10 @@ const Shipping = () => {
                                             color="secondary"
                                             style={{ width: "100%" }}
                                         >
-                                            Back To Cart
+                                            Back
                                         </Button>
                                     </Grid>
-                                    <Grid item xs="6">
+                                    <Grid item xs="12" md="6">
                                         <Button
                                             variant="contained"
                                             color="secondary"

@@ -9,7 +9,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Link as Router } from 'react-router-dom';
+import { Link, Link as Router, useHistory } from 'react-router-dom';
 import { signout } from '../../actions/userAction';
 import logo from '../../assets/commerce.png';
 import useStyles from './styles';
@@ -53,6 +53,7 @@ const Navbar = () => {
     const { userInfo } = userSignin
     const [anchorEl, setAnchorEl] = useState(null);
     const dispatch = useDispatch()
+    const history = useHistory()
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -64,8 +65,10 @@ const Navbar = () => {
 
     const signoutHandler = () => {
         dispatch(signout())
+        history.push("/")
         setAnchorEl(null)
     }
+
     return (
         <AppBar position="fixed" color="primary" >
             <Toolbar>
@@ -90,7 +93,7 @@ const Navbar = () => {
 
                 <Grid container justifyContent="flex-end" spacing={3}>
                     <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
-                        <Badge badgeContent={cartItems.length} color="secondary">
+                        <Badge badgeContent={cartItems && cartItems.length} color="secondary">
                             <ShoppingCart />
                         </Badge>
                     </IconButton>

@@ -63,7 +63,6 @@ const Cart = () => {
         dispatch(removeCartItems(item))
     }
 
-
     if (cartItemsOld.length === 0) {
         return (
 

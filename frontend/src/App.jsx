@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Cart from './components/Cart/Cart';
 import Navbar from './components/Navbar/Navbar';
+import Payment from './components/Payment/Payment';
+import PlaceOrder from './components/PlaceOrder/PlaceOrder';
 import ProductDetail from './components/Products/Product/ProductDetail/ProductDetail';
 import Products from './components/Products/Products';
 import Register from './components/Register/Register';
@@ -13,7 +15,6 @@ function App() {
   const classes = useStyles()
   return (
     <BrowserRouter>
-
       <div>
         <Navbar />
         <div className={classes.toolbar} />
@@ -35,6 +36,12 @@ function App() {
           </Route>
           <Route path="/shipping" exact>
             <Shipping />
+          </Route>
+          <Route path="/payment" exact>
+            <Payment />
+          </Route>
+          <Route path="/placeorder" exact>
+            <PlaceOrder />
           </Route>
         </Switch>
 
