@@ -65,12 +65,11 @@ const Cart = () => {
 
     if (cartItemsOld.length === 0) {
         return (
-
             <Box mt={3} m={3} >
                 {/* Don't have any item in cart */}
                 <Alert severity="error">
                     Your Cart is Empty!{" "}
-                    <Link component={changeURL} to="/">
+                    <Link component={changeURL} to="/products">
                         Go back the product
                     </Link>
                 </Alert>

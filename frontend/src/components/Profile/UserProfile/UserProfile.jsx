@@ -11,16 +11,16 @@ const UserProfile = () => {
     const handleDataForm = (e) => {
         setDataForm({ ...dataForm, [e.target.name]: e.target.value });
     };
-    function changeGender(value) {
-        switch (value) {
-            case "true":
-                return true
-            case "false":
-                return false
-            default:
-                break;
-        }
-    }
+    // function changeGender(value) {
+    //     switch (value) {
+    //         case "true":
+    //             return true
+    //         case "false":
+    //             return false
+    //         default:
+    //             break;
+    //     }
+    // }
     const handleSubmit = (e) => {
         e.preventDefault()
     }

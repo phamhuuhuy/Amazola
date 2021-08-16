@@ -89,7 +89,7 @@ const ProfileNav = ({ current }) => {
                                     <ShoppingBasketIcon />
                                 </Grid>
                                 <Grid item xs="8" container justifyContent="flex-start">
-                                    <Typography>Orders Detail</Typography>
+                                    <Typography>Orders History</Typography>
                                 </Grid>
                             </Grid>
                         </Button>

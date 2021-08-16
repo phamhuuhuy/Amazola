@@ -9,7 +9,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Link as Router, useHistory } from 'react-router-dom';
+import { Link as changeURL, useHistory } from 'react-router-dom';
 import { signout } from '../../actions/userAction';
 import logo from '../../assets/commerce.png';
 import useStyles from './styles';
@@ -70,6 +70,7 @@ const Navbar = () => {
     }
 
     const handleProfile = () => {
+        handleClose()
         history.push("/userprofile")
     }
 
@@ -86,17 +87,17 @@ const Navbar = () => {
                 <Grid className={classes.huy} container justifyContent="flex-center" spacing={5} >
 
                     <Grid item>
-                        <Button component={Router} to="/" color="inherit" variant="outlined" >Home</Button>
+                        <Button component={changeURL} to="/" color="inherit" variant="outlined" >Home</Button>
                     </Grid>
                     <Grid item>
-                        <Button component={Router} to="/product" color="inherit" variant="outlined" >Cart</Button>
+                        <Button component={changeURL} to="/products" color="inherit" variant="outlined" >Product</Button>
 
                     </Grid>
 
                 </Grid>
 
                 <Grid container justifyContent="flex-end" spacing={3}>
-                    <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
+                    <IconButton component={changeURL} to="/cart" aria-label="Show cart items" color="inherit">
                         <Badge badgeContent={cartItems && cartItems.length} color="secondary">
                             <ShoppingCart />
                         </Badge>
@@ -131,7 +132,7 @@ const Navbar = () => {
                             </div>
 
                         ) : (
-                            <Button component={Link} to="/signin">Sign in</Button>
+                            <Button component={changeURL} to="/signin">Sign in</Button>
                         )
                     }
 

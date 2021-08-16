@@ -1,13 +1,12 @@
-import { Grid } from '@material-ui/core'
 import React from 'react'
 
-import useStyles from './styles'
+// import useStyles from './styles'
 
 const Home = () => {
-    const classes = useStyles();
+    // const classes = useStyles();
     return (
         <div>
-
+            home
         </div>
     )
 }
