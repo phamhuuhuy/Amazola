@@ -1,17 +1,18 @@
-import { AppBar, Avatar, Badge, Button, Grid, IconButton, Toolbar } from '@material-ui/core';
+import { AppBar, Avatar, Badge, Button, Grid, IconButton, Toolbar, Typography } from '@material-ui/core';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import { ShoppingCart } from '@material-ui/icons';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as changeURL, useHistory } from 'react-router-dom';
 import { signout } from '../../actions/userAction';
-import logo from '../../assets/commerce.png';
+import logo from '../../assets/logo.png';
 import useStyles from './styles';
 
 const StyledMenu = withStyles({
@@ -69,76 +70,74 @@ const Navbar = () => {
         setAnchorEl(null)
     }
 
-    const handleProfile = () => {
-        handleClose()
-        history.push("/userprofile")
-    }
-
     return (
-        <AppBar position="fixed" color="primary" >
-            <Toolbar>
-                <Grid className={classes.huy1} container justifyContent="flex-start" spacing={1} >
-                    <Grid item>
-                        <img src={logo} alt="amazona" height="50px" />
-
-                    </Grid>
-                </Grid>
-
-                <Grid className={classes.huy} container justifyContent="flex-center" spacing={5} >
-
-                    <Grid item>
-                        <Button component={changeURL} to="/" color="inherit" variant="outlined" >Home</Button>
-                    </Grid>
-                    <Grid item>
-                        <Button component={changeURL} to="/products" color="inherit" variant="outlined" >Product</Button>
-
-                    </Grid>
-
-                </Grid>
-
-                <Grid container justifyContent="flex-end" spacing={3}>
+        <div className={classes.root}>
+            <AppBar position="static" className={classes.appBar}>
+                <Toolbar>
+                    <Typography component={changeURL} to="/" variant='h6' color="inherit" className={classes.logoTitle}>
+                        <img src={logo} alt="Commerce.js" height="50px" className={classes.image} />
+                        FITNEZZ
+                    </Typography>
+                    <Typography className={classes.itemsWrapper} >
+                        <Grid container justifyContent="center" spacing={5} >
+                            <Grid item >
+                                <Button component={changeURL} to="/" variant="text" color="inherit" >Home</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button component={changeURL} to="/products" color="inherit" >Product</Button>
+                            </Grid  >
+                            <Grid item >
+                                <Button color="inherit" >Contact</Button>
+                            </Grid>
+                            <Grid item >
+                                <Button color="inherit">NguHH</Button>
+                            </Grid>
+                        </Grid>
+                    </Typography>
+                    <IconButton aria-label="Show cart items" color="inherit">
+                        <Badge color="secondary">
+                            <AccountCircle />
+                        </Badge>
+                    </IconButton>
                     <IconButton component={changeURL} to="/cart" aria-label="Show cart items" color="inherit">
                         <Badge badgeContent={cartItems && cartItems.length} color="secondary">
                             <ShoppingCart />
                         </Badge>
                     </IconButton>
-                    {
-                        userInfo ? (
-                            <div>
-                                <Avatar onClick={handleClick} aria-controls="customized-menu"
-                                    aria-haspopup="true" className={classes.pink} alt={userInfo.name}>{userInfo.name.charAt(0)}
-                                </Avatar>
-                                <StyledMenu
-                                    id="customized-menu"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={open}
-                                    onClose={handleClose}
-                                >
-                                    <StyledMenuItem onClick={handleProfile}>
-                                        <ListItemIcon>
-                                            <AccountCircleIcon fontSize="small" />
-                                        </ListItemIcon>
-                                        <ListItemText primary="My Profile" />
-                                    </StyledMenuItem>
-                                    <StyledMenuItem onClick={signoutHandler}>
-                                        <ListItemIcon>
-                                            <ExitToAppIcon fontSize="small" />
-                                        </ListItemIcon>
-                                        <ListItemText primary="Sign Out" />
-                                    </StyledMenuItem>
+                    {userInfo ? (
+                        <div>
+                            <Avatar onClick={handleClick} aria-controls="customized-menu"
+                                aria-haspopup="true" className={classes.pink} alt={userInfo.name}>{userInfo.name.charAt(0)}
+                            </Avatar>
+                            <StyledMenu
+                                id="customized-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                open={open}
+                                onClose={handleClose}
+                            >
+                                <StyledMenuItem component={changeURL} to="/userprofile" onClick={handleClose}>
+                                    <ListItemIcon>
+                                        <AccountCircleIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="My Profile" />
+                                </StyledMenuItem>
+                                <StyledMenuItem onClick={signoutHandler}>
+                                    <ListItemIcon>
+                                        <ExitToAppIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Sign Out" />
+                                </StyledMenuItem>
 
-                                </StyledMenu>
-                            </div>
-
-                        ) : (
-                            <Button component={changeURL} to="/signin">Sign in</Button>
-                        )
+                            </StyledMenu>
+                        </div>
+                    )
+                        :
+                        <Button component={changeURL} to="/signin" variant="outlined" color="inherit" className={classes.login}>Login</Button>
                     }
-
-                </Grid>
-            </Toolbar>
-        </AppBar >
+                </Toolbar>
+            </AppBar>
+        </div >
     );
 }
 export default Navbar

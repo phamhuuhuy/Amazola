@@ -14,15 +14,15 @@ import UserProfile from './components/Profile/UserProfile/UserProfile';
 import Register from './components/Register/Register';
 import Shipping from './components/Shipping/Shipping';
 import SignIn from './components/Signin/Signin';
-import useStyles from './styles';
+
 
 function App() {
-  const classes = useStyles()
+
   return (
     <BrowserRouter>
       <div>
         <Navbar />
-        <div className={classes.toolbar} />
+
         <Switch>
           <Route path="/" exact>
             <Home />

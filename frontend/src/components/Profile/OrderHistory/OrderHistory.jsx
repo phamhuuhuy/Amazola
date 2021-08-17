@@ -36,12 +36,7 @@ const OrderHistory = () => {
         dispatch(listOrderMine())
     }, [dispatch])
 
-
-    return loading ? (
-        <CircularProgress color="secondary" />
-    ) : error ? (
-        <Alert severity="error">{error}</Alert>
-    ) : (
+    return (
         <Box mt={5.5}>
             <Box ml={6} mr={6}>
                 <Grid container spacing={5}>
@@ -50,8 +45,11 @@ const OrderHistory = () => {
                         <ProfileNav current={3}></ProfileNav>
                     </Grid>
 
-
-                    <Grid item xs={12} md={9}>
+                    {loading ? (
+                        <CircularProgress color="secondary" />
+                    ) : error ? (
+                        <Alert severity="error">{error}</Alert>
+                    ) : (<Grid item xs={12} md={9}>
                         <Box marginBottom={3}>
                             <Paper elevation={3} style={{ padding: "40px" }}>
                                 <Typography
@@ -101,7 +99,8 @@ const OrderHistory = () => {
                                 </TableContainer>
                             </Paper>
                         </Box>
-                    </Grid>
+                    </Grid>)}
+
                 </Grid>
             </Box>
         </Box >
